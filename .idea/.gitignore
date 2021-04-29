@@ -1,0 +1,9 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../:\Codevoorbeelden\KBS-D M2\JDBC-demo\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+/dataSources/194dc0c5-262c-4a2e-82b0-5a0675fa2b7c.xml
