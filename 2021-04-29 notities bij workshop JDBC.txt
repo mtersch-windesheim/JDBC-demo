@@ -1,0 +1,31 @@
+Update-notities slides 'Workshop JDBC'
+2021-04-29
+
+Voorbereiding: JDBC-driver installeren
+- ga naar link in slides (https://dev.mysql.com/downloads/connector/j/)
+- selecteer optie 'Platform independent' => zo ZIP-file met .jar-bestand i.p.v. MSI-installer (en eindeloze zoektocht naar waar deze de .jar heeft geinstalleerd)
+- pak ZIP-file uit en zet op een handige plek neer
+- in IntelliJ: File > Project Structure > Libraries > '+' > selecteer .jar-bestand
+ - nu in 'Project'-lijstje onder 'External Libraries' ook item 'mysql-connector-java-<versie>'
+
+Stap 1: JDBC-driver laden
+- als je regel 'Class.forName(...)' opneemt krijg je melding 'This is deprecated ... The driver is automatically registered...'
+ => Deze regel is met de nieuwe driver dus niet meer nodig!
+- regel 'import java.sql.*' nog wel nodig (anders kent'ie classes DriverManager, Connection, etc. niet)
+
+Slide 35
+- prepared statements: is tegenwoordig PreparedStatement stmt = connection.PrepareStatement(<query>);
+- let op: om een ? heb je geen quotes (') nodig => [SELECT * FROM designs WHERE owner = ?] i.p.v. [...WHERE owner = '?']
+- vraagtekentjes beginnen te tellen vanaf 1 (i.p.v. 0)
+
+EXTRA:
+
+Maken build zodat je alleen .jar-bestand (evt. + .jar-bestanden externe libraries) hoeft te distribueren:
+- 1x voor je hele project
+ - File > Project Structure > Artifacts > '+' > JAR > From modules with dependencies...
+ - selecteer module (subproject) en startup-class hierin
+ - 'JAR files from libraries': 'extract to JAR' propt ze bij je eigen .jar-bestand in, 'copy to output directory' zet ze in dezelfde directory als je eigen .jar-bestand
+- iedere keer dat je code hebt gewijzigd (en wil publiceren)
+ - Build > Build Artifacts
+ - je .jar-bestand staat nu in <projectdirectory>\out\artifacts\<modulenaam>\<modulenaam>.jar
+- opstarten vanaf commandoprompt: java -jar <modulenaam>.jar
